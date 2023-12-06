@@ -1,7 +1,10 @@
+import kotlin.math.ceil
+import kotlin.math.floor
+import kotlin.math.sqrt
+
 object Day6 : StatelessPuzzle<Int, Int>() {
 
     override fun solvePart1(input: String): Int {
-        val boat = Boat(1)
         val races = input.lines()
             .map {
                 Regex("""\d+""").findAll(it.substringAfter(":"))
@@ -9,15 +12,13 @@ object Day6 : StatelessPuzzle<Int, Int>() {
             }.zipWithNext { l1, l2 ->
                 l1.zip(l2)
             }.flatMap { it.map { Race(it.first, it.second) } }
+
         return races
-            .map { race ->
-                (0..race.time).count { race.isWinning(boat, it) }
-            }
+            .map { it.winningTimesCount() }
             .reduce(Int::times)
     }
 
     override fun solvePart2(input: String): Int {
-        val boat = Boat(1)
         val race = input.lines()
             .map {
                 Regex("""\d+""").findAll(it.substringAfter(":").replace(" ", ""))
@@ -26,17 +27,18 @@ object Day6 : StatelessPuzzle<Int, Int>() {
                 l1.zip(l2)
             }.flatMap { it.map { Race(it.first, it.second) } }
             .first()
-        val winningFromTime = (0..race.time)
-            .first { race.isWinning(boat, it) }
-        val winningToTime = (race.time downTo 0)
-            .first { race.isWinning(boat, it) }
-        return (winningToTime - winningFromTime + 1).toInt()
+
+        return race.winningTimesCount()
     }
 
     data class Race(val time: Long, val distance: Long) {
-        fun isWinning(boat: Boat, chargeTime: Long) = boat.distance(chargeTime, time - chargeTime) > distance
-    }
-    data class Boat(val acceleration: Int) {
-        fun distance(accelerationTime: Long, travelTime: Long): Long = accelerationTime * acceleration * travelTime
+        fun winningTimesCount(): Int {
+            val winningFromTime =
+                ceil((time - sqrt((time * time - 4 * (distance + 1)).toDouble())) / 2)
+            val winningToTime =
+                floor((time + sqrt((time * time - 4 * (distance + 1)).toDouble())) / 2)
+
+            return (winningToTime - winningFromTime + 1).toInt()
+        }
     }
 }
