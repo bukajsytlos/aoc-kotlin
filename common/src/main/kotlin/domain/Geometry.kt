@@ -11,6 +11,10 @@ data class Position(val x: Int, val y: Int) {
     fun <T> valueFrom(array: Array<Array<T>>): T? = runCatching { array[this.y][this.x] }.getOrNull()
 }
 
+data class Point(val x: Long, val y: Long) {
+    fun manhattanDistanceTo(other: Point): Long = abs(x - other.x) + abs(y - other.y)
+}
+
 enum class Direction(val dx: Int, val dy: Int, val isDiagonal: Boolean) {
     NW(-1, -1, true),
     N(0, -1, false),
