@@ -8,6 +8,7 @@ data class Position(val x: Int, val y: Int) {
     fun diagonalAdjacents() = Direction.entries.filter { it.isDiagonal }.map { adjacentIn(it) }.toSet()
     fun adjacentIn(direction: Direction) = Position(x + direction.dx, y + direction.dy)
     fun manhattanDistanceTo(other: Position): Int = abs(x - other.x) + abs(y - other.y)
+    fun <T> valueFrom(array: Array<Array<T>>): T? = runCatching { array[this.y][this.x] }.getOrNull()
 }
 
 enum class Direction(val dx: Int, val dy: Int, val isDiagonal: Boolean) {
@@ -19,6 +20,18 @@ enum class Direction(val dx: Int, val dy: Int, val isDiagonal: Boolean) {
     S(0, 1, false),
     SW(-1, 1, true),
     W(-1, 0, false),
+    ;
+
+    fun opposite(): Direction = when (this) {
+        NW -> SE
+        N -> S
+        NE -> SW
+        E -> W
+        SE -> NW
+        S -> N
+        SW -> NE
+        W -> E
+    }
 }
 
 data class Position3D(val x: Int, val y: Int, val z: Int) {
