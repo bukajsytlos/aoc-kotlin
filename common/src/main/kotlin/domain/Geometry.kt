@@ -6,13 +6,14 @@ data class Position(val x: Int, val y: Int) {
     fun adjacents() = Direction.entries.map { adjacentIn(it) }.toSet()
     fun perpendicularAdjacents() = Direction.entries.filter { !it.isDiagonal }.map { adjacentIn(it) }.toSet()
     fun diagonalAdjacents() = Direction.entries.filter { it.isDiagonal }.map { adjacentIn(it) }.toSet()
-    fun adjacentIn(direction: Direction) = Position(x + direction.dx, y + direction.dy)
+    fun adjacentIn(direction: Direction, length: Int = 1) = Position(x + direction.dx * length, y + direction.dy * length)
     fun manhattanDistanceTo(other: Position): Int = abs(x - other.x) + abs(y - other.y)
     fun <T> valueFrom(array: Array<Array<T>>): T? = runCatching { array[this.y][this.x] }.getOrNull()
 }
 
 data class Point(val x: Long, val y: Long) {
     fun manhattanDistanceTo(other: Point): Long = abs(x - other.x) + abs(y - other.y)
+    fun adjacentIn(direction: Direction, length: Int = 1) = Point(x + direction.dx * length, y + direction.dy * length)
 }
 
 enum class Direction(val dx: Int, val dy: Int, val isDiagonal: Boolean) {
