@@ -48,4 +48,10 @@ data class Position3D(val x: Int, val y: Int, val z: Int) {
         copy(z = z + 1),
         copy(z = z - 1),
     )
+    companion object {
+        fun from(commaSeparated: String): Position3D {
+            val (x, y, z) = commaSeparated.split(",")
+            return Position3D(x.toInt(), y.toInt(), z.toInt())
+        }
+    }
 }
