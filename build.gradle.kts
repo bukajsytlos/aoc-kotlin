@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    alias(libs.plugins.org.jetbrains.kotlin.jvm)
+    alias(libs.plugins.kotlin.jvm)
 }
 
 allprojects {
@@ -14,7 +14,7 @@ allprojects {
     }
 
     apply(plugin = "idea")
-    apply(plugin = rootProject.libs.plugins.org.jetbrains.kotlin.jvm.get().pluginId)
+    apply(plugin = rootProject.libs.plugins.kotlin.jvm.get().pluginId)
 
     dependencies {
         testImplementation(rootProject.libs.kotest.runner.junit5)
