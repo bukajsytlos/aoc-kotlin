@@ -1,0 +1,1 @@
+class Day2Test : StatelessPuzzleTest<Day2, Int, Int>(Day2::class, 15, 12)

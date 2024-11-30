@@ -1,0 +1,1 @@
+class Day5Test : StatefulPuzzleTest<Day5, String, String>(Day5::class, "CMZ", "MCD")

@@ -1,0 +1,1 @@
+class Day25Test : StatelessPuzzleTest<Day25, String, Unit>(Day25::class, "2=-1=0", println())

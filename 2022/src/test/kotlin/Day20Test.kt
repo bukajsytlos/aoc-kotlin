@@ -1,0 +1,1 @@
+class Day20Test : StatelessPuzzleTest<Day20, Long, Long>(Day20::class, 3, 1623178306)
