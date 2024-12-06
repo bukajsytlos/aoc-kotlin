@@ -28,17 +28,6 @@ class Day5(input: String) : StatefulPuzzle<Int, Int>(input) {
     }
 
     private fun List<Int>.fixByRules(): List<Int> {
-        val tmpArray = this.reversed().toTypedArray()
-        for (i in 0..< size - 1) {
-            for (j in 0..< size - 1 - i) {
-                val v1 = tmpArray[j]
-                val v2 = tmpArray[j + 1]
-                if (pageRules.contains(v1 to v2)) {
-                    tmpArray[j + 1] = v1
-                    tmpArray[j] = v2
-                }
-            }
-        }
-        return tmpArray.toList()
+        return this.sortedWith { o1, o2 -> if (pageRules.contains(o1 to o2)) 1 else -1 }
     }
 }
