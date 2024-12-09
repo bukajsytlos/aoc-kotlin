@@ -1,5 +1,6 @@
 package domain
 
+import domain.Direction.entries
 import kotlin.math.abs
 
 data class Position(val x: Int, val y: Int) {
@@ -9,6 +10,13 @@ data class Position(val x: Int, val y: Int) {
     fun adjacentIn(direction: Direction, length: Int = 1) = Position(x + direction.dx * length, y + direction.dy * length)
     fun manhattanDistanceTo(other: Position): Int = abs(x - other.x) + abs(y - other.y)
     fun <T> valueFrom(array: Array<Array<T>>): T? = runCatching { array[this.y][this.x] }.getOrNull()
+    fun isOutOfBound(maxX: Int, maxY: Int = maxX): Boolean = x < 0 || x > maxX - 1 || y < 0 || y > maxY - 1
+    fun vector(to: Position) = Vector(to.x - x, to.y - y)
+    fun plus(vector: Vector) = Position(x + vector.dx, y + vector.dy)
+}
+
+data class Vector(val dx: Int, val dy: Int) {
+    fun invert() = Vector(-dx, -dy)
 }
 
 data class Point(val x: Long, val y: Long) {
