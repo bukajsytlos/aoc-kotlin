@@ -31,6 +31,39 @@ class Day9(input: String) : StatefulPuzzle<Long, Long>(input) {
     }
 
     private fun Array<Int>.compact(): Array<Int> {
+        var tailIndex = lastIndex
+        while (0 < tailIndex) {
+            var fileId = this[tailIndex]
+            if (fileId == -1) {
+                tailIndex--
+                continue
+            } else {
+                var fileSize = 1
+                var fileIndex = tailIndex
+                while (fileIndex > 0 && fileId == this[fileIndex - 1]) {
+                    fileSize++
+                    fileIndex--
+                }
+                tailIndex -= fileSize
+                var headIndex = 0
+                var freeSpaceSize = 0
+                while (headIndex <= tailIndex && freeSpaceSize < fileSize) {
+                    val head = this[headIndex]
+                    if (head == -1) {
+                        freeSpaceSize++
+                    } else {
+                        freeSpaceSize = 0
+                    }
+                    headIndex++
+                }
+                if (freeSpaceSize >= fileSize) {
+                    (0..< fileSize).forEach {
+                        this[headIndex - 1 - it] = fileId
+                        this[tailIndex + 1 + it] = -1
+                    }
+                }
+            }
+        }
         return this
     }
 
