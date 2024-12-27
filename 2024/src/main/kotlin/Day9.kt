@@ -10,6 +10,39 @@ class Day9(input: String) : StatefulPuzzle<Long, Long>(input) {
 
     override fun solvePart2(): Long = disk.toTypedArray().compact().checksum()
 
+/*    data class Disk(private val diskMap: List<Int>) {
+        private lateinit var first: Node
+        private lateinit var last: Node
+
+        init {
+
+        }
+
+        fun fragmentingCompact() {
+            nodes.reverse()
+        }
+
+        fun compact() {
+
+        }
+
+        fun checksum(): Long = sequence { yield() }
+            .fold(0L to 0) { acc, node -> acc.first + node.checksum(acc.second) to acc.second + node.size }
+            .first
+
+        sealed class Node(val size: Int, var previous: Node?, var next: Node?) {
+            abstract fun checksum(position: Int): Int
+            class File(val id: Int, size: Int, previous: Node, next: Node) : Node(size, previous, next) {
+                override fun checksum(position: Int): Int = (position..<position + size).sumOf { id * it }
+
+            }
+
+            class Empty(size: Int, previous: Node, next: Node) : Node(size, previous, next) {
+                override fun checksum(position: Int) = 0
+            }
+        }
+    }*/
+
     private fun Array<Int>.defragment(): Array<Int> {
         var headIndex = 0
         var tailIndex = lastIndex
