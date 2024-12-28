@@ -2,9 +2,7 @@ import domain.Direction
 import domain.Position
 
 class Day4(input: String) : StatefulPuzzle<Int, Int>(input) {
-    private val lines = input.lines()
-    private val mapSize = lines.size
-    private val wordSearch: Array<Array<Char>> = Array(mapSize) { i -> lines[i].map { it }.toTypedArray() }
+    private val wordSearch: Array<Array<Char>> = input.asTyped2DArray { it }
 
     override fun solvePart1(): Int {
         var xmasCount = 0

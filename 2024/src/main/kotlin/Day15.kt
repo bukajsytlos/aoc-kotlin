@@ -11,7 +11,7 @@ class Day15(input: String) : StatefulPuzzle<Int, Int>(input) {
     private val lines = inputParts[0].lines()
     private val mapSize = lines.size
 
-    private val warehouseMap: Array<Array<Char>> = Array(mapSize) { i -> lines[i].map { it }.toTypedArray() }
+    private val warehouseMap: Array<Array<Char>> = inputParts[0].asTyped2DArray { it }
     private val initRobotPosition = warehouseMap.findPositionsOf('@').first()
 
     private val warehouseMap2: Array<Array<Char>> = Array(mapSize) { i -> lines[i].flatMap { it.widen() }.toTypedArray() }

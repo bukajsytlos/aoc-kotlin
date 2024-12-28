@@ -2,9 +2,7 @@ import domain.Position
 import domain.findPositionsOf
 
 class Day10(input: String) : StatefulPuzzle<Int, Int>(input) {
-    private val lines = input.lines()
-    private val mapSize = lines.size
-    private val heightMap: Array<Array<Int>> = Array(mapSize) { i -> lines[i].map { it.digitToInt() }.toTypedArray() }
+    private val heightMap: Array<Array<Int>> = input.asTyped2DArray { it.digitToInt() }
     private val trailHeads: Set<Position> = heightMap.findPositionsOf(0)
 
     override fun solvePart1(): Int = trailHeads.sumOf { it.score(false) }
