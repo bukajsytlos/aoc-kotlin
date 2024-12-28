@@ -15,6 +15,15 @@ data class Position(val x: Int, val y: Int) {
     fun plus(vector: Vector) = Position(x + vector.dx, y + vector.dy)
 }
 
+fun <T> Array<Array<T>>.findPositionsOf(target: T): Set<Position> =
+    flatMapIndexed { y, line -> line.mapIndexed { x, o -> if (o == target) Position(x, y) else null }.filterNotNull() }
+        .toSet()
+
+fun <T> Array<Array<T>>.valueFrom(position: Position): T? = runCatching { this[position.y][position.x] }.getOrNull()
+fun <T> Array<Array<T>>.setValueTo(position: Position, value: T) {
+    this[position.y][position.x] = value
+}
+
 data class Vector(val dx: Int, val dy: Int) {
     fun invert() = Vector(-dx, -dy)
 }
@@ -48,6 +57,13 @@ enum class Direction(val dx: Int, val dy: Int, val isDiagonal: Boolean) {
     companion object {
         fun perpendicular() = entries.filter { !it.isDiagonal }
         fun diagonal() = entries.filter { it.isDiagonal }
+        fun of(char: Char): Direction = when (char) {
+            '^' -> N
+            '>' -> E
+            '<' -> W
+            'v' -> S
+            else -> error("unknown direction: $char")
+        }
     }
 }
 
