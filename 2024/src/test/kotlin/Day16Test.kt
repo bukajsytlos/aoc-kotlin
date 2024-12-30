@@ -1,0 +1,1 @@
+class Day16Test : StatefulPuzzleTest<Day16, Int, Int>(Day16::class, 11048, 64, false)

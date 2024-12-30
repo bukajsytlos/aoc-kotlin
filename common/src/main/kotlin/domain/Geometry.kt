@@ -54,6 +54,26 @@ enum class Direction(val dx: Int, val dy: Int, val isDiagonal: Boolean) {
         SW -> NE
         W -> E
     }
+    fun left90(): Direction = when (this) {
+        Direction.NW -> Direction.SW
+        Direction.N -> Direction.W
+        Direction.NE -> Direction.NW
+        Direction.E -> Direction.N
+        Direction.SE -> Direction.NE
+        Direction.S -> Direction.E
+        Direction.SW -> Direction.SE
+        Direction.W -> Direction.S
+    }
+    fun right90(): Direction = when (this) {
+        Direction.NW -> Direction.NE
+        Direction.N -> Direction.E
+        Direction.NE -> Direction.SE
+        Direction.E -> Direction.S
+        Direction.SE -> Direction.SW
+        Direction.S -> Direction.W
+        Direction.SW -> Direction.NW
+        Direction.W -> Direction.N
+    }
     companion object {
         fun perpendicular() = entries.filter { !it.isDiagonal }
         fun diagonal() = entries.filter { it.isDiagonal }
