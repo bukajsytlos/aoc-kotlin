@@ -20,7 +20,7 @@ class Day4(input: String) : StatefulPuzzle<Int, Int>(input) {
             val removableRolls = paperRollsPositions.filter { roll ->
                 roll.adjacents().count { it in paperRollsPositions } < 4
             }.toSet()
-           paperRollsPositions.removeAll(removableRolls)
+            paperRollsPositions.removeAll(removableRolls)
             sum += removableRolls.size
         } while (removableRolls.isNotEmpty())
         return sum

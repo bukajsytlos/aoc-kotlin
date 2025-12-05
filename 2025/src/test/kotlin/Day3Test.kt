@@ -1,1 +1,1 @@
-class Day3Test : StatefulPuzzleTest<Day3, Long, Long>(Day3::class, 357L, 3121910778619L, false)
+class Day3Test : StatefulPuzzleTest<Day3, Long, Long>(Day3::class, 357L, 3121910778619L)
