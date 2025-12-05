@@ -1,6 +1,6 @@
 class Day2(input: String) : StatefulPuzzle<Long, Long>(input) {
     val ids = input.split(",")
-        .flatMap { LongRange(it.substringBefore("-").toLong(), it.substringAfter("-").toLong()) }
+        .flatMap { it.asLongRange() }
 
 
     override fun solvePart1(): Long {
