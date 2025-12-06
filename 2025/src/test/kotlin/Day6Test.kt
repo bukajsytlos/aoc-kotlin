@@ -1,0 +1,1 @@
+class Day6Test : StatefulPuzzleTest<Day6, Long, Long>(Day6::class, 4277556L, 3263827L, false)
