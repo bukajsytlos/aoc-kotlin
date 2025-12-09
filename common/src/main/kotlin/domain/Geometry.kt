@@ -13,6 +13,12 @@ data class Position(val x: Int, val y: Int) {
     fun isOutOfBound(maxX: Int, maxY: Int = maxX): Boolean = x < 0 || x > maxX - 1 || y < 0 || y > maxY - 1
     fun vector(to: Position) = Vector(to.x - x, to.y - y)
     fun plus(vector: Vector) = Position(x + vector.dx, y + vector.dy)
+    companion object {
+        fun from(commaSeparated: String): Position {
+            val (x, y) = commaSeparated.split(",")
+            return Position(x.toInt(), y.toInt())
+        }
+    }
 }
 
 fun <T> Array<Array<T>>.findPositionsOf(target: T): Set<Position> =
