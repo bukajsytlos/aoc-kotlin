@@ -102,6 +102,9 @@ data class Position3D(val x: Int, val y: Int, val z: Int) {
         copy(z = z + 1),
         copy(z = z - 1),
     )
+
+    fun distanceTo(other: Position3D): Long = (x - other.x).toLong() * (x - other.x) + (y - other.y).toLong() * (y - other.y) + (z - other.z).toLong() * (z - other.z)
+
     companion object {
         fun from(commaSeparated: String): Position3D {
             val (x, y, z) = commaSeparated.split(",")
